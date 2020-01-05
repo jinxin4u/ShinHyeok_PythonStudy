@@ -1,0 +1,61 @@
+DB : acornschool
+TABLE : pett
+		이름	유형	길이	기본값
+primary key	id	INT	11	AUTO_INCREMENT
+		name	VARCHAR20
+		owner	VARCHAR20
+		species	VARCHAR20
+		sex	CHAR	1
+		birth	DATE
+		death	DATE
+
+프로시져 : pet_delete
+매개변수 이름	문맥	데이터유형
+	inname	IN	VARCHAR(50)
+	res	OUT	INT
+BEGIN
+	DECLARE cnt INT DEFAULT 0;
+	SELECT COUNT(*) INTO cnt from pertt WHERE NAME=inname;
+	if cnt > 0 then DELETE FROM pett WHERE NAME=inname;
+		SET res=0;
+	ELSE SET res=2;
+	END if;
+END
+
+
+프로시져 : pet_insert
+매개변수 이름	문맥	데이터유형
+	name	IN	VARCHAR(50)
+	owner	IN	VARCHAR(50)
+	species	IN	VARCHAR(50)
+	sex	IN	CHAR(1)
+	birth	IN	DATE
+	death	IN	DATE
+BEGIN
+	INSERT INTO pett(name, owner, species, sex, birth, death)
+		VALUES(name, owner, species, sex, birth, death);
+END
+
+
+프로시져 : pet_select
+BEGIN
+	SELECT * FROM pett;
+END
+
+
+프로시져 : pet_update
+매개변수 		이름		문맥	데이터유형
+		searchname	IN	VARCHAR(50)
+		updatename	IN	VARCHAR(50)
+		res		OUT	INT
+
+BEGIN
+	DECLARE cnt INT DEFAULT 0;
+	SELECT COUNT(*) INTO cnt FROM pett WHERE name=searchname;
+	if cnt > 0 then UPDATE pett SET NAME=updatename WHERE name=searchname;
+		SET res=0;
+	ELSE SET res=2;
+	END if;
+END
+
+

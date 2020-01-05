@@ -1,0 +1,64 @@
+DB : acornschool
+TABLE : sungjuk
+		이름	유형	길이	기본값
+primary key	bunho	INT	11	AUTO_INCREMENT
+		name	VARCHAR20
+		kor	INT	11
+		eng	INT	11
+		mat	INT	11
+		total	INT	11
+		average	FLOAT
+		grade	CHAR	1
+
+프로시져 : sungjuk_delete
+매개변수 이름	문맥	데이터유형
+	inname	IN	VARCHAR(20)
+	out_res	OUT	INT
+BEGIN
+	DECLARE cnt INT DEFAULT 0;
+	SELECT COUNT(*) INTO cnt from sungjuk WHERE NAME=in_name;
+	if cnt > 0 then DELETE FROM pett WHERE NAME=in_name;
+		SET out_res=0;
+	ELSE SET out_res=2;
+	END if;
+END
+
+
+프로시져 : sungjuk_insert
+매개변수 이름	문맥	데이터유형
+	in_name	IN	VARCHAR(50)
+	in_kor	IN	INT
+	in_mat	IN	INT
+	in_eng	IN	INT
+
+BEGIN
+	INSERT INTO sungjuk(name, kor, mat, eng)
+		VALUES(in_name, in_kor, in_mat, in_eng);
+END
+
+
+프로시져 : sungjuk_select
+BEGIN
+	SELECT * FROM sungjuk;
+END
+
+
+프로시져 : sungjuk_update
+매개변수 		이름		문맥	데이터유형
+		in_name		IN	VARCHAR(20)
+		up_name		IN	VARCHAR(20)
+		in_kor		IN	INT
+		in_mat		IN	INT
+		in_eng		IN	INT
+		out_res		OUT	INT
+
+BEGIN
+	DECLARE cnt INT DEFAULT 0;
+	SELECT COUNT(*) INTO cnt FROM sungjuk WHERE name=in_name;
+	if cnt > 0 then UPDATE sungjuk SET NAME=up_name WHERE name=in_name;
+		SET res=0;
+	ELSE SET res=2;
+	END if;
+END
+
+
