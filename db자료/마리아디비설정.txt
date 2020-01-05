@@ -1,0 +1,13 @@
+grant all privileges on *.* to 'root'@'%' identified by 'acorn1234Q!' with grant option;
+
+flush privileges
+
+firewall-cmd --permanent --zone=public --add-port=3306/tcp
+
+firewall-cmd --reload
+
+firewall-cmd --list-all
+
+systemctl restart firewalld
+
+systemctl enable mariadb
